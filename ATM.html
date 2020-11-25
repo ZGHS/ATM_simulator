@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ATM</title>
+    <meta name="description" content="A set of animated ambient canvas backgrounds with different effects"/>
+    <meta name="keywords" content="canvas, ambient, background, animation, javascript, demo, web development"/>
+    <meta name="author" content="Codrops"/>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="lib/AmbientCanvasBackgrounds/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/AmbientCanvasBackgrounds/css/demo1.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/AmbientCanvasBackgrounds/css/demo2.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/AmbientCanvasBackgrounds/css/demo3.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/AmbientCanvasBackgrounds/css/demo4.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/AmbientCanvasBackgrounds/css/demo5.css"/>
+    <script>document.documentElement.className = "js";
+    var supportsCssVars = function () {
+        var e, t = document.createElement("style");
+        return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e
+    };
+    supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+
+    <!--jquery.js-->
+    <script src="lib/jquery_js/jquery-3.4.1.js"></script>
+
+    <!--vue.js-->
+    <script src="lib/vue_js/vue.js"></script>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="lib/bootstrap_js/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap_js/3.3.7/css/bootstrap-theme.min.css">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="lib/bootstrap_js/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<main>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="z-index: 999">
+            <div class="panel panel-default" id="nav_login"
+                 style="border: 0;background: rgba(0,0,0,0.0);margin-top: 20px">
+                <div class="panel-heading"
+                     style="text-align: center;font-size: xx-large;background: rgba(0,0,0,0.1);color: white">ATM
+                </div>
+                <div class="panel-body" style="background: rgba(0,0,0,0.1);margin-top: 200px">
+                    <div style="display:flex;justify-content:center;align-items: center;">
+                        <form class="btn-group-vertical" action="#">
+                            <div class="input-group input-group-lg" style="margin-bottom: 20px">
+                                <label for="account" class="input-group-addon"
+                                       style="background: rgba(0,0,0,0.1);color: white">卡号：</label>
+                                <input style="background: rgba(0,0,0,0.1);color: white" type="text" class="form-control"
+                                       id="account" placeholder="卡号">
+                            </div>
+                            <div class="input-group input-group-lg" style="margin-bottom: 20px">
+                                <label for="password" class="input-group-addon"
+                                       style="background: rgba(0,0,0,0.1);color: white">密码：</label>
+                                <input style="background: rgba(0,0,0,0.1);color: white" type="password"
+                                       class="form-control" id="password" placeholder="密码">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 btn-group btn-group-lg"
+                                     style="display:flex;justify-content:center;align-items: center;">
+                                    <button type="button" class="btn btn-primary" onclick="login()"
+                                            style="background: rgba(0,0,0,0.1)">登录
+                                    </button>
+                                </div>
+                                <div class="col-md-6 btn-group btn-group-lg"
+                                     style="display:flex;justify-content:center;align-items: center;">
+                                    <button type="reset" class="btn btn-danger" style="background: rgba(0,0,0,0.1)">重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" id="nav_home" hidden
+                 style="border: 0;background: rgba(0,0,0,0.0);margin-top: 20px">
+                <div class="panel-heading"
+                     style="text-align: center;font-size: xx-large;background: rgba(0,0,0,0.1);color: white">ATM
+                </div>
+                <div class="panel-body">
+                    <div style="display:flex;justify-content:center;align-items: center;">
+                        <form class="btn-group-vertical">
+                            <div class="input-group input-group-lg" style="margin-bottom: 20px">
+                                <label for="input_balance" class="input-group-addon"
+                                       style="background: rgba(0,0,0,0.1);color: white">余额：</label>
+                                <input type="text" class="form-control" id="input_balance" disabled
+                                       style="background: rgba(0,0,0,0.1);color: white">
+                            </div>
+                            <div class="input-group input-group-lg" style="margin-bottom: 20px">
+                                <label class="input-group-addon"
+                                       style="background: rgba(0,0,0,0.1);color: white">存款：</label>
+                                <div class="input-group-lg">
+                                    <input type="number" step="100" min="100"
+                                           style="width: 215px;background: rgba(0,0,0,0.1);color: white"
+                                           class="form-control"
+                                           id="input_deposit" value="0"
+                                    >
+                                    <button type="button" class=" btn btn-info btn-lg"
+                                            style="margin-left: 20px;background: rgba(0,0,0,0.1);color: white"
+                                            onclick="deposit()">
+                                        存款
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="input-group input-group-lg"
+                                 style="margin-bottom: 20px;background: rgba(0,0,0,0.1);color: white">
+                                <label class="input-group-addon"
+                                       style="background: rgba(0,0,0,0.1);color: white">取款：</label>
+                                <div class="input-group-lg">
+                                    <input type="number" step="100" min="100"
+                                           style="width: 215px;background: rgba(0,0,0,0.1);color: white"
+                                           class="form-control"
+                                           id="input_withdraw" value="0"
+                                    >
+                                    <button type="button" class=" btn btn-info btn-lg"
+                                            style="margin-left: 20px;background: rgba(0,0,0,0.1);color: white"
+                                            onclick="withdraw()">
+                                        取款
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="overflow: hidden;width: 393px;height:260px;border: 0px solid white">
+                                <div
+                                        style="height:280px;width:410px;overflow: scroll;" id="my_scroll">
+                                    <table class="table  table-bordered" id="record_app"
+                                           style="color:white;font-size: large;text-align: center">
+                                        <th>
+                                        <td>操作</td>
+                                        <td>金额</td>
+                                        <td>余额</td>
+                                        <td>时间</td>
+                                        </th>
+                                        <tr
+                                                is="record_item"
+                                                v-for="(record, index) in records"
+                                                v-bind:key="record.id"
+                                                v-bind:record="record"
+                                        ></tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-4 btn-group btn-group-lg"
+                                >
+                                </div>
+                                <div class="col-md-4 btn-group btn-group-lg"
+                                     style="display:flex;justify-content:center;align-items: center;">
+                                    <button type="button" class="btn btn-danger" onclick="exit()"
+                                            style="background: rgba(0,0,0,0.1);color: white">退出
+                                    </button>
+                                </div>
+                                <div class="col-md-4 btn-group btn-group-lg"
+                                >
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="frame">
+        <div id="alert_app" class="alert alert-warning" v-if="isHidden"
+             style="text-align: center;background: rgba(0,0,0,0.5)">{{alert_info}}
+            <button type="button" class="close fade in" aria-label="Close" style="color: white;font-size: large">
+                <span aria-hidden="true" v-on:click="close()" style="color: white;font-size: large">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class=" content--canvas">
+    </div>
+
+
+</main>
+
+
+<!--data.js-->
+<script src="js/ATM.js"></script>
+<script src="lib/AmbientCanvasBackgrounds/js/noise.min.js"></script>
+<script src="lib/AmbientCanvasBackgrounds/js/util.js"></script>
+
+
+<!--<script src="lib/AmbientCanvasBackgrounds/js/coalesce.js"></script>-->
+<!--<script src="lib/AmbientCanvasBackgrounds/js/pipeline.js"></script>-->
+<!--<script src="lib/AmbientCanvasBackgrounds/js/shift.js"></script>-->
+<script src="lib/AmbientCanvasBackgrounds/js/swirl.js"></script>
+
+
+<!--不建议使用-->
+<!--<script src="lib/AmbientCanvasBackgrounds/js/aurora.js"></script>-->
+</body>
+</html>
